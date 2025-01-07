@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const FeedbackButton = ({onClick, text}) => {
+const Button = ({onClick, text}) => {
   return (
     <button onClick={onClick}>
       {text}
@@ -8,10 +8,10 @@ const FeedbackButton = ({onClick, text}) => {
   )
 }
 
-const FeedbackStatistics = ({fieldText, value}) => {
+const StatisticLine = ({text, value}) => {
   return (
     <div>
-      {fieldText} {value}
+      {text} {value}
     </div>
   )
 }
@@ -25,10 +25,10 @@ const Statistics = (
 
   if (all == 0) {
     return (
-      <>
+      <div>
         <h1>{statisticsText}</h1>
         <p>No feedback given</p>
-      </>
+      </div>
     )
   }
 
@@ -41,15 +41,15 @@ const Statistics = (
   const positiveText = 'positive'
 
   return (
-    <>
+    <div>
       <h1>{statisticsText}</h1>
-      <FeedbackStatistics fieldText={goodOptionText} value={good} />
-      <FeedbackStatistics fieldText={neutralOptionText} value={neutral} />
-      <FeedbackStatistics fieldText={badOptionText} value={bad} />
-      <FeedbackStatistics fieldText={allText} value={all} />
-      <FeedbackStatistics fieldText={averageText} value={average} />
-      <FeedbackStatistics fieldText={positiveText} value={positive + '%'} />
-    </>
+      <StatisticLine text={goodOptionText} value={good} />
+      <StatisticLine text={neutralOptionText} value={neutral} />
+      <StatisticLine text={badOptionText} value={bad} />
+      <StatisticLine text={allText} value={all} />
+      <StatisticLine text={averageText} value={average} />
+      <StatisticLine text={positiveText} value={positive + '%'} />
+    </div>
   )
 }
 
@@ -78,9 +78,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <FeedbackButton onClick={handleGood} text={goodOptionText} />
-      <FeedbackButton onClick={handleNeutral} text={neutralOptionText} />
-      <FeedbackButton onClick={handleBad} text={badOptionText} />
+      <Button onClick={handleGood} text={goodOptionText} />
+      <Button onClick={handleNeutral} text={neutralOptionText} />
+      <Button onClick={handleBad} text={badOptionText} />
       <Statistics
         goodOptionText={goodOptionText}
         neutralOptionText={neutralOptionText}
