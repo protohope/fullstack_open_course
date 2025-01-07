@@ -19,7 +19,20 @@ const FeedbackStatistics = ({fieldText, value}) => {
 const Statistics = (
   {goodOptionText, neutralOptionText, badOptionText,
     good, neutral, bad}) => {
+  const statisticsText = 'statistics'
+
   const all = good + neutral + bad
+
+  if (all == 0) {
+    return (
+      <>
+        <h1>{statisticsText}</h1>
+        <p>No feedback given</p>
+      </>
+    )
+  }
+
+
   const average = all == 0 ? 0 : ((good - bad) / all)
   const positive = all == 0 ? 0 : 100 * good / all
 
@@ -29,7 +42,7 @@ const Statistics = (
 
   return (
     <>
-      <h1>statistics</h1>
+      <h1>{statisticsText}</h1>
       <FeedbackStatistics fieldText={goodOptionText} value={good} />
       <FeedbackStatistics fieldText={neutralOptionText} value={neutral} />
       <FeedbackStatistics fieldText={badOptionText} value={bad} />
