@@ -8,10 +8,10 @@ const FeedbackButton = ({onClick, text}) => {
   )
 }
 
-const FeedbackStatistics = ({optionText, value}) => {
+const FeedbackStatistics = ({fieldText, value}) => {
   return (
     <div>
-      {optionText} {value}
+      {fieldText} {value}
     </div>
   )
 }
@@ -22,20 +22,42 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const all = good + neutral + bad
+  const average = all == 0 ? 0 : ((good - bad) / all)
+  const positive = all == 0 ? 0 : 100 * good / all
+
   const goodOptionText = 'good'
   const neutralOptionText = 'neutral'
   const badOptionText = 'bad'
+  const allText = 'all'
+  const averageText = 'average'
+  const positiveText = 'positive'
+
+  const handleGood = () => {
+    setGood(good + 1)
+  }
+
+  const handleNeutral = () => {
+    setNeutral(neutral + 1)
+  }
+
+  const handleBad = () => {
+    setBad(bad + 1)
+  }
 
   return (
     <div>
       <h1>give feedback</h1>
-      <FeedbackButton onClick={() => setGood(good + 1)} text={goodOptionText} />
-      <FeedbackButton onClick={() => setNeutral(neutral + 1)} text={neutralOptionText} />
-      <FeedbackButton onClick={() => setBad(bad + 1)} text={badOptionText} />
+      <FeedbackButton onClick={handleGood} text={goodOptionText} />
+      <FeedbackButton onClick={handleNeutral} text={neutralOptionText} />
+      <FeedbackButton onClick={handleBad} text={badOptionText} />
       <h1>statistics</h1>
-      <FeedbackStatistics optionText={goodOptionText} value={good} />
-      <FeedbackStatistics optionText={neutralOptionText} value={neutral} />
-      <FeedbackStatistics optionText={badOptionText} value={bad} />
+      <FeedbackStatistics fieldText={goodOptionText} value={good} />
+      <FeedbackStatistics fieldText={neutralOptionText} value={neutral} />
+      <FeedbackStatistics fieldText={badOptionText} value={bad} />
+      <FeedbackStatistics fieldText={allText} value={all} />
+      <FeedbackStatistics fieldText={averageText} value={average} />
+      <FeedbackStatistics fieldText={positiveText} value={positive + '%'} />
     </div>
   )
 }
