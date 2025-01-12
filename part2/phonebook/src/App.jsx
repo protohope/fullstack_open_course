@@ -13,6 +13,18 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
 
+    const nameAlreadyExists = persons.find(person => {
+      if (person.name === newName) {
+        return true
+      }
+      return false
+    })
+
+    if (nameAlreadyExists) {
+      alert(`${newName} is already added to phonebook`)
+      return;
+    }
+
     const newPersonObject = {
       name: newName
     }
